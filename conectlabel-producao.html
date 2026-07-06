@@ -1,0 +1,704 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
+:root{
+  --cl-bg:#071720;
+  --cl-surface:#0E2530;
+  --cl-surface-2:#153341;
+  --cl-border:#1F3F4F;
+  --cl-border-strong:#2C5768;
+  --cl-navy:#004A6B;
+  --cl-green:#5B8257;
+  --cl-gold:#FFC229;
+  --cl-text:#F2F5F4;
+  --cl-text-dim:#8FA3AC;
+  --cl-danger:#C24B3F;
+}
+*{box-sizing:border-box;}
+.cl-app{
+  font-family:'Inter',sans-serif;
+  background:var(--cl-bg);
+  color:var(--cl-text);
+  border-radius:16px;
+  padding:32px;
+  min-height:700px;
+  font-size:15px;
+}
+.cl-title{
+  font-family:'Bebas Neue',sans-serif;
+  letter-spacing:1px;
+}
+.cl-badge{
+  font-family:'Bebas Neue',sans-serif;
+  letter-spacing:1px;
+}
+.cl-scroll::-webkit-scrollbar{height:8px;}
+.cl-scroll::-webkit-scrollbar-thumb{background:var(--cl-border-strong);border-radius:4px;}
+.cl-input{background:var(--cl-surface-2);border:1px solid var(--cl-border);color:var(--cl-text);border-radius:8px;padding:11px 14px;font-size:14px;outline:none;}
+.cl-input::placeholder{color:var(--cl-text-dim);}
+</style>
+<div class="cl-app" id="cl-root">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:6px;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <img src="data:image/png;base64,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" alt="Conectlabel" style="width:38px;height:38px;object-fit:contain;flex-shrink:0;" />
+      <div>
+        <div class="cl-title" style="font-size:34px;color:var(--cl-gold);line-height:1;">CONECTLABEL — PRODUÇÃO</div>
+        <div style="font-size:15px;color:var(--cl-text-dim);margin-top:4px;">Quadro de ordens de serviço</div>
+      </div>
+    </div>
+    <button id="cl-new-btn" style="background:var(--cl-gold);color:#2A1F00;border:none;border-radius:10px;padding:14px 22px;font-weight:700;font-size:15px;cursor:pointer;letter-spacing:0.3px;flex-shrink:0;">+ Nova ordem de serviço</button>
+  </div>
+
+  <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:20px 0 22px;padding:16px;background:var(--cl-surface);border:1px solid var(--cl-border);border-radius:10px;">
+    <div style="font-size:12px;color:var(--cl-text-dim);text-transform:uppercase;letter-spacing:0.5px;flex-basis:100%;margin-bottom:2px;">Filtros</div>
+    <input id="cl-f-pa" class="cl-input" placeholder="PA" style="width:140px;" />
+    <input id="cl-f-nome" class="cl-input" placeholder="Nome" style="flex:1;min-width:180px;" />
+    <input id="cl-f-data" type="date" class="cl-input" style="width:180px;" />
+    <button id="cl-clear-filters" style="background:transparent;border:1px solid var(--cl-border-strong);color:var(--cl-text-dim);border-radius:8px;padding:11px 14px;font-size:13px;cursor:pointer;">Limpar</button>
+  </div>
+
+  <div id="cl-loading" style="color:var(--cl-text-dim);font-size:14px;padding:24px 0;">Carregando quadro...</div>
+  <div id="cl-board" class="cl-scroll" style="display:none;gap:14px;overflow-x:auto;padding-bottom:10px;"></div>
+  <div style="margin-top:16px;font-size:12px;color:var(--cl-text-dim);">Este quadro é compartilhado — qualquer pessoa com este link vê e edita as mesmas ordens de serviço.</div>
+
+  <div style="margin-top:36px;padding-top:24px;border-top:1px solid var(--cl-border-strong);">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:14px;">
+      <div class="cl-title" style="font-size:24px;color:var(--cl-gold);">SERVIÇOS FEITOS</div>
+      <div id="cl-done-count" style="font-size:12px;color:var(--cl-text-dim);background:var(--cl-surface-2);border-radius:10px;padding:4px 10px;">0 concluídos</div>
+    </div>
+
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px;padding:16px;background:var(--cl-surface);border:1px solid var(--cl-border);border-radius:10px;">
+      <div style="font-size:12px;color:var(--cl-text-dim);text-transform:uppercase;letter-spacing:0.5px;flex-basis:100%;margin-bottom:2px;">Filtrar por período</div>
+      <select id="cl-done-periodo" class="cl-input" style="width:150px;">
+        <option value="todos">Todos</option>
+        <option value="dia">Dia</option>
+        <option value="semana">Semana</option>
+        <option value="mes">Mês</option>
+      </select>
+      <div id="cl-done-periodo-value-wrap"></div>
+      <button id="cl-done-clear" style="background:transparent;border:1px solid var(--cl-border-strong);color:var(--cl-text-dim);border-radius:8px;padding:11px 14px;font-size:13px;cursor:pointer;">Limpar</button>
+    </div>
+
+    <div id="cl-done-list" class="cl-scroll" style="display:flex;flex-direction:column;gap:10px;"></div>
+  </div>
+</div>
+
+<div id="cl-modal-wrap" style="display:none;min-height:1px;">
+  <div id="cl-modal-overlay" style="position:static;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;padding:24px 12px;border-radius:16px;">
+    <div id="cl-modal" style="background:var(--cl-surface);border:1px solid var(--cl-border);border-radius:14px;padding:26px;width:100%;max-width:540px;font-family:'Inter',sans-serif;color:var(--cl-text);max-height:88vh;overflow-y:auto;">
+      <div class="cl-title" style="font-size:24px;color:var(--cl-gold);margin-bottom:18px;" id="cl-modal-title">Nova ordem de serviço</div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div style="display:flex;gap:10px;">
+          <label style="font-size:12px;color:var(--cl-text-dim);flex:1;">PA
+            <input id="cl-f-modal-pa" class="cl-input" style="width:100%;margin-top:4px;" placeholder="Ex: PA-1042" />
+          </label>
+          <label style="font-size:12px;color:var(--cl-text-dim);flex:2;">Nome
+            <input id="cl-f-modal-nome" class="cl-input" style="width:100%;margin-top:4px;" placeholder="Ex: Rótulo Distribuidora Silva" />
+          </label>
+        </div>
+        <label style="font-size:12px;color:var(--cl-text-dim);">Tipo de material
+          <input id="cl-f-modal-material" class="cl-input" style="width:100%;margin-top:4px;" placeholder="Ex: Papel couché adesivo BOPP" />
+        </label>
+        <label style="font-size:12px;color:var(--cl-text-dim);">Data de entrega
+          <input id="cl-f-modal-data-entrega" type="date" class="cl-input" style="width:100%;margin-top:4px;" />
+        </label>
+        <div style="display:flex;gap:10px;">
+          <label style="font-size:12px;color:var(--cl-text-dim);flex:1;">Quantidade a produzir
+            <input id="cl-f-modal-qtd" type="number" min="1" value="1" class="cl-input" style="width:100%;margin-top:4px;" />
+          </label>
+          <label style="font-size:12px;color:var(--cl-text-dim);flex:1;">Metros lineares
+            <input id="cl-f-modal-metros" type="number" min="0" step="0.01" class="cl-input" style="width:100%;margin-top:4px;" placeholder="Ex: 350" />
+          </label>
+        </div>
+
+        <div style="border-top:1px solid var(--cl-border);margin-top:6px;padding-top:10px;">
+          <div style="font-size:11px;color:var(--cl-text-dim);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Responsável por etapa</div>
+          <div id="cl-modal-responsaveis" style="display:flex;flex-direction:column;gap:8px;"></div>
+        </div>
+
+        <label style="font-size:12px;color:var(--cl-text-dim);margin-top:6px;">Observações
+          <textarea id="cl-f-modal-obs" rows="2" class="cl-input" style="width:100%;margin-top:4px;resize:vertical;" placeholder="Opcional"></textarea>
+        </label>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:18px;">
+        <button id="cl-cancel-btn" style="background:transparent;border:1px solid var(--cl-border-strong);color:var(--cl-text);border-radius:8px;padding:9px 16px;font-size:13px;cursor:pointer;">Cancelar</button>
+        <button id="cl-save-btn" style="background:var(--cl-gold);border:none;color:#2A1F00;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var STAGES = [
+    {id:'layout_aprovado', label:'Layout aprovado'},
+    {id:'cliche_chegou', label:'Clichê chegou'},
+    {id:'rebobinadeira', label:'Rebobinadeira'},
+    {id:'impressora_kromia', label:'Impressora Kromia'},
+    {id:'revisora', label:'Revisora'},
+    {id:'empacotando', label:'Empacotando'}
+  ];
+
+  var board = document.getElementById('cl-board');
+  var loading = document.getElementById('cl-loading');
+  var fPa = document.getElementById('cl-f-pa');
+  var fNome = document.getElementById('cl-f-nome');
+  var fData = document.getElementById('cl-f-data');
+  var modalWrap = document.getElementById('cl-modal-wrap');
+  var responsaveisWrap = document.getElementById('cl-modal-responsaveis');
+  var editingId = null;
+  var allOrders = [];
+  var openAddPanelStage = null;
+  var confirmDeleteId = null;
+
+  var doneList = document.getElementById('cl-done-list');
+  var doneCount = document.getElementById('cl-done-count');
+  var donePeriodo = document.getElementById('cl-done-periodo');
+  var donePeriodoValueWrap = document.getElementById('cl-done-periodo-value-wrap');
+  var donePeriodoValue = '';
+
+  function renderDonePeriodoInput(){
+    donePeriodoValueWrap.innerHTML = '';
+    var tipo = donePeriodo.value;
+    var input = null;
+    if(tipo === 'dia'){
+      input = document.createElement('input');
+      input.type = 'date';
+    } else if(tipo === 'semana'){
+      input = document.createElement('input');
+      input.type = 'week';
+    } else if(tipo === 'mes'){
+      input = document.createElement('input');
+      input.type = 'month';
+    }
+    if(input){
+      input.className = 'cl-input';
+      input.style.cssText = 'width:180px;';
+      input.value = donePeriodoValue;
+      input.addEventListener('change', function(){
+        donePeriodoValue = input.value;
+        renderDone();
+      });
+      donePeriodoValueWrap.appendChild(input);
+    }
+  }
+
+  function isoWeekKey(ts){
+    var d = new Date(ts);
+    d.setHours(0,0,0,0);
+    d.setDate(d.getDate() + 3 - ((d.getDay()+6)%7));
+    var week1 = new Date(d.getFullYear(), 0, 4);
+    var week = 1 + Math.round(((d - week1) / 86400000 - 3 + ((week1.getDay()+6)%7)) / 7);
+    return d.getFullYear() + '-W' + ('0'+week).slice(-2);
+  }
+
+  function monthKey(ts){
+    var d = new Date(ts);
+    return d.getFullYear() + '-' + ('0'+(d.getMonth()+1)).slice(-2);
+  }
+
+  function renderDone(){
+    var lastStage = STAGES[STAGES.length - 1];
+    var completed = allOrders.filter(function(o){ return o.etapa === lastStage.id && o.liberado === true; });
+
+    var tipo = donePeriodo.value;
+    if(tipo !== 'todos' && donePeriodoValue){
+      completed = completed.filter(function(o){
+        var ts = o.atualizadoEm || o.criadoEm;
+        if(tipo === 'dia') return dateKey(ts) === donePeriodoValue;
+        if(tipo === 'semana') return isoWeekKey(ts) === donePeriodoValue;
+        if(tipo === 'mes') return monthKey(ts) === donePeriodoValue;
+        return true;
+      });
+    }
+
+    completed.sort(function(a,b){ return (b.atualizadoEm||0) - (a.atualizadoEm||0); });
+
+    doneCount.textContent = completed.length + (completed.length === 1 ? ' concluído' : ' concluídos');
+    doneList.innerHTML = '';
+
+    if(completed.length === 0){
+      var empty = document.createElement('div');
+      empty.style.cssText = 'font-size:13px;color:var(--cl-text-dim);padding:16px 4px;text-align:center;background:var(--cl-surface);border:1px solid var(--cl-border);border-radius:10px;';
+      empty.textContent = 'Nenhum serviço concluído nesse período.';
+      doneList.appendChild(empty);
+      return;
+    }
+
+    completed.forEach(function(o){
+      var row = document.createElement('div');
+      row.style.cssText = 'display:flex;flex-wrap:wrap;align-items:center;gap:14px;background:var(--cl-surface);border:1px solid var(--cl-border);border-left:3px solid #4C9A5B;border-radius:10px;padding:14px;';
+
+      var parts = [
+        '<div style="font-size:13px;color:var(--cl-gold);font-weight:700;min-width:90px;">OS #' + o.numero + '</div>',
+        '<div style="flex:1;min-width:160px;font-size:14px;font-weight:600;">' + esc(o.nome || '(sem nome)') + (o.pa ? ' <span style="color:var(--cl-text-dim);font-weight:400;">· PA ' + esc(o.pa) + '</span>' : '') + '</div>',
+        '<div style="font-size:12px;color:var(--cl-text-dim);min-width:140px;">' + esc(o.material || '') + '</div>',
+        '<div style="font-size:12px;color:var(--cl-text-dim);min-width:110px;">' + (o.quantidade ? 'qtd ' + o.quantidade : '') + '</div>',
+        '<div style="font-size:12px;color:var(--cl-text-dim);min-width:120px;">' + (o.metrosLineares ? o.metrosLineares + ' m lineares' : '') + '</div>',
+        '<div style="font-size:12px;color:var(--cl-text-dim);min-width:150px;">Concluído em ' + dateKey(o.atualizadoEm || o.criadoEm) + '</div>'
+      ];
+      row.innerHTML = parts.join('');
+      doneList.appendChild(row);
+    });
+  }
+
+  donePeriodo.addEventListener('change', function(){
+    donePeriodoValue = '';
+    renderDonePeriodoInput();
+    renderDone();
+  });
+  renderDonePeriodoInput();
+
+  document.getElementById('cl-done-clear').addEventListener('click', function(){
+    donePeriodo.value = 'todos';
+    donePeriodoValue = '';
+    renderDonePeriodoInput();
+    renderDone();
+  });
+
+  function buildResponsaveisFields(o){
+    responsaveisWrap.innerHTML = '';
+    var currentStageId = o ? o.etapa : STAGES[0].id;
+    var currentIdx = STAGES.findIndex(function(s){ return s.id === currentStageId; });
+
+    STAGES.forEach(function(stage, idx){
+      var status = idx < currentIdx ? 'feita' : (idx === currentIdx ? 'atual' : 'bloqueada');
+      var statusLabel = status === 'feita' ? 'Concluída' : (status === 'atual' ? 'Etapa atual' : 'Bloqueada');
+      var statusColor = status === 'feita' ? '#4C9A5B' : (status === 'atual' ? 'var(--cl-gold)' : 'var(--cl-text-dim)');
+
+      var wrap = document.createElement('div');
+      wrap.style.cssText = 'display:flex;flex-direction:column;gap:5px;' + (status === 'bloqueada' ? 'opacity:0.5;' : '');
+
+      var labelRow = document.createElement('div');
+      labelRow.style.cssText = 'display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--cl-text-dim);';
+      labelRow.innerHTML =
+        '<span>' + (idx+1) + '. ' + esc(stage.label) + '</span>' +
+        '<span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;color:' + statusColor + ';">' +
+          (status === 'bloqueada' ? '🔒 ' : '') + statusLabel +
+        '</span>';
+      wrap.appendChild(labelRow);
+
+      var input = document.createElement('input');
+      input.className = 'cl-input';
+      input.style.cssText = 'width:100%;' + (status === 'bloqueada' ? 'cursor:not-allowed;' : '');
+      input.placeholder = status === 'bloqueada' ? 'Disponível quando a OS chegar nesta etapa' : 'Nome do responsável';
+      input.setAttribute('data-resp-stage', stage.id);
+      input.value = (o && o.responsaveis && o.responsaveis[stage.id]) || '';
+      input.disabled = status === 'bloqueada';
+      wrap.appendChild(input);
+
+      responsaveisWrap.appendChild(wrap);
+    });
+  }
+
+  function esc(s){
+    var d = document.createElement('div');
+    d.textContent = s == null ? '' : String(s);
+    return d.innerHTML;
+  }
+
+  function genId(){
+    return 'os_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2,7);
+  }
+
+  function dateKey(ts){
+    var d = new Date(ts);
+    var m = ('0' + (d.getMonth()+1)).slice(-2);
+    var day = ('0' + d.getDate()).slice(-2);
+    return d.getFullYear() + '-' + m + '-' + day;
+  }
+
+  async function loadAll(){
+    try{
+      var listRes = await window.storage.list('os:', true);
+      var keys = (listRes && listRes.keys) || [];
+      var orders = [];
+      for(var i=0;i<keys.length;i++){
+        try{
+          var r = await window.storage.get(keys[i], true);
+          if(r && r.value){
+            orders.push(JSON.parse(r.value));
+          }
+        }catch(e){}
+      }
+      orders.sort(function(a,b){ return (b.criadoEm||0) - (a.criadoEm||0); });
+      return orders;
+    }catch(e){
+      console.error('Erro ao carregar', e);
+      return [];
+    }
+  }
+
+  async function saveOrder(order){
+    await window.storage.set('os:' + order.id, JSON.stringify(order), true);
+  }
+
+  function nextOsNumber(){
+    var max = 0;
+    allOrders.forEach(function(o){ if(o.numero > max) max = o.numero; });
+    return max + 1;
+  }
+
+  function render(){
+    var qPa = (fPa.value || '').toLowerCase().trim();
+    var qNome = (fNome.value || '').toLowerCase().trim();
+    var qData = fData.value || '';
+
+    var filtered = allOrders.filter(function(o){
+      if(qPa && (o.pa||'').toLowerCase().indexOf(qPa) === -1) return false;
+      if(qNome && (o.nome||'').toLowerCase().indexOf(qNome) === -1) return false;
+      if(qData && dateKey(o.criadoEm) !== qData) return false;
+      return true;
+    });
+
+    board.style.display = 'flex';
+    loading.style.display = 'none';
+    board.innerHTML = '';
+
+    STAGES.forEach(function(stage, idx){
+      var col = document.createElement('div');
+      col.style.cssText = 'min-width:280px;max-width:280px;background:var(--cl-surface);border:1px solid var(--cl-border);border-radius:12px;padding:14px;flex-shrink:0;';
+
+      var isLastStage = idx === STAGES.length - 1;
+      var items = filtered.filter(function(o){ return o.etapa === stage.id && !(isLastStage && o.liberado === true); });
+
+      var header = document.createElement('div');
+      header.style.cssText = 'display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--cl-border);';
+      header.innerHTML =
+        '<div class="cl-badge" style="width:28px;height:28px;border-radius:50%;background:var(--cl-gold);color:#2A1F00;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">' + (idx+1) + '</div>' +
+        '<div style="flex:1;font-size:14px;font-weight:600;line-height:1.2;">' + esc(stage.label) + '</div>' +
+        '<div style="font-size:12px;color:var(--cl-text-dim);background:var(--cl-surface-2);border-radius:10px;padding:3px 8px;">' + items.length + '</div>' +
+        (idx > 0 ? '<button data-toggle-add="' + stage.id + '" title="Adicionar PA liberado da etapa anterior" style="width:26px;height:26px;border-radius:6px;background:var(--cl-gold);color:#2A1F00;border:none;cursor:pointer;font-size:16px;font-weight:700;line-height:1;flex-shrink:0;">+</button>' : '');
+      col.appendChild(header);
+
+      if(idx > 0 && openAddPanelStage === stage.id){
+        var prevStage = STAGES[idx - 1];
+        var eligible = allOrders.filter(function(o){ return o.etapa === prevStage.id && o.liberado === true; });
+        var panel = document.createElement('div');
+        panel.style.cssText = 'background:var(--cl-surface-2);border:1px solid var(--cl-border-strong);border-radius:8px;padding:8px;margin-bottom:10px;display:flex;flex-direction:column;gap:6px;';
+
+        if(eligible.length === 0){
+          panel.innerHTML = '<div style="font-size:11px;color:var(--cl-text-dim);">Nenhum PA liberado em "' + esc(prevStage.label) + '" ainda.</div>';
+          var closeBtn = document.createElement('button');
+          closeBtn.textContent = 'Fechar';
+          closeBtn.style.cssText = 'background:transparent;border:1px solid var(--cl-border-strong);color:var(--cl-text);border-radius:6px;padding:5px 8px;font-size:11px;cursor:pointer;align-self:flex-end;';
+          closeBtn.addEventListener('click', function(){ openAddPanelStage = null; render(); });
+          panel.appendChild(closeBtn);
+        } else {
+          var select = document.createElement('select');
+          select.className = 'cl-input';
+          select.style.cssText = 'width:100%;padding:6px 8px;font-size:12px;';
+          eligible.forEach(function(o){
+            var opt = document.createElement('option');
+            opt.value = o.id;
+            opt.textContent = 'OS #' + o.numero + (o.pa ? ' · PA ' + o.pa : '') + ' · ' + (o.nome || '');
+            select.appendChild(opt);
+          });
+          panel.appendChild(select);
+
+          var respInput = document.createElement('input');
+          respInput.className = 'cl-input';
+          respInput.style.cssText = 'width:100%;';
+          respInput.placeholder = 'Responsável em ' + stage.label;
+          panel.appendChild(respInput);
+
+          var actions = document.createElement('div');
+          actions.style.cssText = 'display:flex;justify-content:flex-end;gap:6px;';
+          var cancelBtn = document.createElement('button');
+          cancelBtn.textContent = 'Cancelar';
+          cancelBtn.style.cssText = 'background:transparent;border:1px solid var(--cl-border-strong);color:var(--cl-text);border-radius:6px;padding:5px 10px;font-size:11px;cursor:pointer;';
+          cancelBtn.addEventListener('click', function(){ openAddPanelStage = null; render(); });
+          var confirmBtn = document.createElement('button');
+          confirmBtn.textContent = 'Adicionar';
+          confirmBtn.style.cssText = 'background:var(--cl-gold);border:none;color:#2A1F00;border-radius:6px;padding:5px 10px;font-size:11px;font-weight:700;cursor:pointer;';
+          confirmBtn.addEventListener('click', function(){
+            var o = allOrders.find(function(x){ return x.id === select.value; });
+            if(!o) return;
+            if(!o.responsaveis) o.responsaveis = {};
+            o.responsaveis[stage.id] = respInput.value.trim();
+            o.etapa = stage.id;
+            o.liberado = false;
+            o.atualizadoEm = Date.now();
+            openAddPanelStage = null;
+            render();
+            saveOrder(o).catch(function(e){ console.error('Erro ao salvar', e); });
+          });
+          actions.appendChild(cancelBtn);
+          actions.appendChild(confirmBtn);
+          panel.appendChild(actions);
+        }
+        col.appendChild(panel);
+      }
+
+      var cardsWrap = document.createElement('div');
+      cardsWrap.style.cssText = 'display:flex;flex-direction:column;gap:8px;min-height:40px;';
+
+      if(items.length === 0){
+        var empty = document.createElement('div');
+        empty.style.cssText = 'font-size:11px;color:var(--cl-text-dim);padding:10px 4px;text-align:center;';
+        empty.textContent = 'Sem ordens aqui';
+        cardsWrap.appendChild(empty);
+      }
+
+      items.forEach(function(o){
+        var card = document.createElement('div');
+        var statusColor = o.liberado ? '#4C9A5B' : 'var(--cl-danger)';
+        card.style.cssText = 'background:var(--cl-surface-2);border:1px solid var(--cl-border);border-left:3px solid ' + statusColor + ';border-radius:8px;padding:13px;';
+
+        var top = document.createElement('div');
+        top.style.cssText = 'display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:6px;min-height:20px;';
+        if(confirmDeleteId === o.id){
+          top.innerHTML =
+            '<div style="font-size:12px;color:var(--cl-danger);font-weight:700;">Excluir esta OS?</div>' +
+            '<div style="display:flex;gap:10px;flex-shrink:0;">' +
+              '<button data-cancel-delete="' + o.id + '" style="background:transparent;border:none;color:var(--cl-text-dim);cursor:pointer;font-size:12px;padding:0;">cancelar</button>' +
+              '<button data-confirm-delete="' + o.id + '" style="background:var(--cl-danger);border:none;color:#fff;border-radius:6px;cursor:pointer;font-size:11px;font-weight:700;padding:4px 9px;">sim, excluir</button>' +
+            '</div>';
+        } else {
+          top.innerHTML =
+            '<div style="font-size:12px;color:var(--cl-gold);font-weight:700;">OS #' + o.numero + (o.pa ? ' · ' + esc(o.pa) : '') + '</div>' +
+            '<div style="display:flex;gap:8px;flex-shrink:0;">' +
+              '<button data-edit="' + o.id + '" style="background:transparent;border:none;color:var(--cl-text-dim);cursor:pointer;font-size:12px;padding:0;">editar</button>' +
+              '<button data-delete="' + o.id + '" style="background:transparent;border:none;color:var(--cl-danger);cursor:pointer;font-size:12px;padding:0;">excluir</button>' +
+            '</div>';
+        }
+        card.appendChild(top);
+
+        var nome = document.createElement('div');
+        nome.style.cssText = 'font-size:14px;font-weight:600;margin-bottom:3px;';
+        nome.textContent = o.nome || '(sem nome)';
+        card.appendChild(nome);
+
+        if(o.material || o.quantidade || o.metrosLineares){
+          var material = document.createElement('div');
+          material.style.cssText = 'font-size:12px;color:var(--cl-text-dim);margin-bottom:5px;';
+          var matParts = [];
+          if(o.material) matParts.push(o.material);
+          if(o.quantidade) matParts.push('qtd ' + o.quantidade);
+          if(o.metrosLineares) matParts.push(o.metrosLineares + ' m lineares');
+          material.textContent = matParts.join(' · ');
+          card.appendChild(material);
+        }
+
+        var respAtual = (o.responsaveis && o.responsaveis[o.etapa]) || '';
+        var meta = document.createElement('div');
+        meta.style.cssText = 'font-size:12px;color:var(--cl-text-dim);margin-bottom:10px;';
+        var metaParts = [];
+        if(respAtual) metaParts.push('Resp: ' + respAtual);
+        if(o.dataEntrega) metaParts.push('Entrega: ' + o.dataEntrega.split('-').reverse().join('/'));
+        metaParts.push('Criado ' + dateKey(o.criadoEm));
+        meta.textContent = metaParts.join(' · ');
+        card.appendChild(meta);
+
+        if(isLastStage){
+          var concludeBtn = document.createElement('button');
+          concludeBtn.setAttribute('data-conclude', o.id);
+          concludeBtn.textContent = '✔ Concluir e enviar para Serviços Feitos';
+          concludeBtn.style.cssText = 'width:100%;background:#4C9A5B;border:none;color:#fff;border-radius:8px;padding:9px 10px;font-size:12px;font-weight:700;cursor:pointer;';
+          card.appendChild(concludeBtn);
+        } else {
+          var releaseRow = document.createElement('div');
+          releaseRow.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:8px;';
+
+          var releaseLabel = document.createElement('span');
+          releaseLabel.style.cssText = 'font-size:11px;font-weight:600;color:' + statusColor + ';';
+          releaseLabel.textContent = o.liberado ? 'Liberado' : 'Não liberado';
+          releaseRow.appendChild(releaseLabel);
+
+          var toggle = document.createElement('button');
+          toggle.setAttribute('data-toggle-release', o.id);
+          toggle.setAttribute('role', 'switch');
+          toggle.setAttribute('aria-checked', o.liberado ? 'true' : 'false');
+          toggle.title = 'Liberar para a próxima etapa';
+          toggle.style.cssText = 'position:relative;width:38px;height:22px;border-radius:11px;border:none;cursor:pointer;padding:0;flex-shrink:0;background:' + statusColor + ';transition:background 0.15s;';
+          toggle.innerHTML = '<span style="position:absolute;top:2px;left:' + (o.liberado ? '18px' : '2px') + ';width:18px;height:18px;border-radius:50%;background:#fff;transition:left 0.15s;"></span>';
+          releaseRow.appendChild(toggle);
+
+          card.appendChild(releaseRow);
+        }
+
+        if(idx > 0){
+          var backBtn = document.createElement('button');
+          backBtn.setAttribute('data-back-stage', o.id);
+          backBtn.textContent = '‹ voltar para ' + STAGES[idx - 1].label;
+          backBtn.style.cssText = 'width:100%;text-align:left;background:transparent;border:none;color:var(--cl-text-dim);cursor:pointer;font-size:11px;padding:6px 0 0;';
+          card.appendChild(backBtn);
+        }
+
+        cardsWrap.appendChild(card);
+      });
+
+      col.appendChild(cardsWrap);
+      board.appendChild(col);
+    });
+
+    board.querySelectorAll('[data-edit]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        openModal(btn.getAttribute('data-edit'));
+      });
+    });
+
+    board.querySelectorAll('[data-delete]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        confirmDeleteId = btn.getAttribute('data-delete');
+        render();
+      });
+    });
+
+    board.querySelectorAll('[data-cancel-delete]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        confirmDeleteId = null;
+        render();
+      });
+    });
+
+    board.querySelectorAll('[data-confirm-delete]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var id = btn.getAttribute('data-confirm-delete');
+        confirmDeleteId = null;
+        allOrders = allOrders.filter(function(x){ return x.id !== id; });
+        render();
+        window.storage.delete('os:' + id, true).catch(function(e){ console.error('Erro ao excluir', e); });
+      });
+    });
+
+    board.querySelectorAll('[data-back-stage]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var id = btn.getAttribute('data-back-stage');
+        var o = allOrders.find(function(x){ return x.id === id; });
+        if(o){
+          var idx = STAGES.findIndex(function(s){ return s.id === o.etapa; });
+          if(idx > 0){
+            o.etapa = STAGES[idx - 1].id;
+            o.liberado = false;
+            o.atualizadoEm = Date.now();
+            render();
+            saveOrder(o).catch(function(e){ console.error('Erro ao salvar', e); });
+          }
+        }
+      });
+    });
+
+    board.querySelectorAll('[data-toggle-release]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var id = btn.getAttribute('data-toggle-release');
+        var o = allOrders.find(function(x){ return x.id === id; });
+        if(o){
+          o.liberado = !o.liberado;
+          o.atualizadoEm = Date.now();
+          render();
+          saveOrder(o).catch(function(e){ console.error('Erro ao salvar', e); });
+        }
+      });
+    });
+
+    board.querySelectorAll('[data-conclude]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var id = btn.getAttribute('data-conclude');
+        var o = allOrders.find(function(x){ return x.id === id; });
+        if(o){
+          o.liberado = true;
+          o.atualizadoEm = Date.now();
+          render();
+          saveOrder(o).catch(function(e){ console.error('Erro ao salvar', e); });
+        }
+      });
+    });
+
+    board.querySelectorAll('[data-toggle-add]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var stageId = btn.getAttribute('data-toggle-add');
+        openAddPanelStage = (openAddPanelStage === stageId) ? null : stageId;
+        render();
+      });
+    });
+
+    renderDone();
+  }
+
+  function openModal(id){
+    editingId = id || null;
+    var o = editingId ? allOrders.find(function(x){ return x.id === editingId; }) : null;
+    document.getElementById('cl-modal-title').textContent = o ? ('Editar OS #' + o.numero) : 'Nova ordem de serviço';
+    document.getElementById('cl-f-modal-pa').value = o ? (o.pa||'') : '';
+    document.getElementById('cl-f-modal-nome').value = o ? (o.nome||'') : '';
+    document.getElementById('cl-f-modal-material').value = o ? (o.material||'') : '';
+    document.getElementById('cl-f-modal-data-entrega').value = o ? (o.dataEntrega||'') : '';
+    document.getElementById('cl-f-modal-qtd').value = o ? (o.quantidade||1) : 1;
+    document.getElementById('cl-f-modal-metros').value = o ? (o.metrosLineares||'') : '';
+    document.getElementById('cl-f-modal-obs').value = o ? (o.observacoes||'') : '';
+    buildResponsaveisFields(o);
+    modalWrap.style.display = 'block';
+    modalWrap.style.minHeight = '600px';
+  }
+
+  function closeModal(){
+    modalWrap.style.display = 'none';
+    modalWrap.style.minHeight = '1px';
+    editingId = null;
+  }
+
+  document.getElementById('cl-new-btn').addEventListener('click', function(){ openModal(null); });
+  document.getElementById('cl-cancel-btn').addEventListener('click', closeModal);
+
+  document.getElementById('cl-save-btn').addEventListener('click', function(){
+    var nome = document.getElementById('cl-f-modal-nome').value.trim();
+    if(!nome){
+      document.getElementById('cl-f-modal-nome').style.borderColor = 'var(--cl-danger)';
+      return;
+    }
+    var pa = document.getElementById('cl-f-modal-pa').value.trim();
+    var material = document.getElementById('cl-f-modal-material').value.trim();
+    var dataEntrega = document.getElementById('cl-f-modal-data-entrega').value;
+    var qtd = parseInt(document.getElementById('cl-f-modal-qtd').value, 10) || 1;
+    var metrosLineares = document.getElementById('cl-f-modal-metros').value.trim();
+    var obs = document.getElementById('cl-f-modal-obs').value.trim();
+    var responsaveis = {};
+    responsaveisWrap.querySelectorAll('[data-resp-stage]').forEach(function(inp){
+      responsaveis[inp.getAttribute('data-resp-stage')] = inp.value.trim();
+    });
+
+    var toSave;
+    if(editingId){
+      var o = allOrders.find(function(x){ return x.id === editingId; });
+      o.pa = pa; o.nome = nome; o.material = material; o.dataEntrega = dataEntrega; o.quantidade = qtd; o.metrosLineares = metrosLineares; o.observacoes = obs; o.responsaveis = responsaveis;
+      o.atualizadoEm = Date.now();
+      toSave = o;
+    } else {
+      var novo = {
+        id: genId(),
+        numero: nextOsNumber(),
+        pa: pa,
+        nome: nome,
+        material: material,
+        dataEntrega: dataEntrega,
+        quantidade: qtd,
+        metrosLineares: metrosLineares,
+        observacoes: obs,
+        responsaveis: responsaveis,
+        etapa: STAGES[0].id,
+        liberado: false,
+        criadoEm: Date.now(),
+        atualizadoEm: Date.now()
+      };
+      allOrders.unshift(novo);
+      toSave = novo;
+    }
+    closeModal();
+    render();
+    saveOrder(toSave).catch(function(e){ console.error('Erro ao salvar', e); });
+  });
+
+  fPa.addEventListener('input', render);
+  fNome.addEventListener('input', render);
+  fData.addEventListener('change', render);
+  document.getElementById('cl-clear-filters').addEventListener('click', function(){
+    fPa.value = ''; fNome.value = ''; fData.value = '';
+    render();
+  });
+
+  (async function init(){
+    allOrders = await loadAll();
+    render();
+  })();
+})();
+</script>
