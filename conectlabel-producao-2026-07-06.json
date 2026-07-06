@@ -1,0 +1,131 @@
+{
+  "embedded": true,
+  "sistema": "conectlabel-producao",
+  "versao": 5,
+  "exportadoEm": "2026-07-06T13:10:53.461Z",
+  "etapas": {
+    "flexo": [
+      {
+        "id": "layout_aprovado",
+        "label": "Layout aprovado"
+      },
+      {
+        "id": "cliche_solicitado",
+        "label": "Clichê solicitado"
+      },
+      {
+        "id": "cliche_chegou",
+        "label": "Clichê/faca chegou"
+      },
+      {
+        "id": "rebobinadeira",
+        "label": "Rebobinadeira"
+      },
+      {
+        "id": "impressora_kromia",
+        "label": "Impressora Kromia"
+      },
+      {
+        "id": "revisora",
+        "label": "Revisora"
+      },
+      {
+        "id": "empacotando",
+        "label": "Empacotando"
+      }
+    ],
+    "digital": [
+      {
+        "id": "layout_aprovado",
+        "label": "Layout aprovado"
+      },
+      {
+        "id": "preparacao",
+        "label": "Preparação"
+      },
+      {
+        "id": "impressao_mimaki",
+        "label": "Impressão Mimaki"
+      },
+      {
+        "id": "corte_vicut",
+        "label": "Corte Vicut"
+      },
+      {
+        "id": "revisao",
+        "label": "Revisão"
+      },
+      {
+        "id": "empacotamento",
+        "label": "Empacotamento"
+      }
+    ]
+  },
+  "boards": {
+    "flexo": {
+      "ordens": [
+        {
+          "id": "id_mr98hxlc_r9vwr",
+          "numero": 2,
+          "pa": "PA323",
+          "nome": "RT GEL FIXADOR KIDS COM MANUELZINHO 250G",
+          "material": "BOPP BRANCO",
+          "dataEntrega": "2026-07-06",
+          "quantidade": "5,0000 / MI",
+          "metrosLineares": "381.00",
+          "observacoes": "",
+          "responsaveis": {
+            "layout_aprovado": "MATHEUS",
+            "cliche_solicitado": "",
+            "cliche_chegou": "",
+            "rebobinadeira": "",
+            "impressora_kromia": "",
+            "revisora": "",
+            "empacotando": ""
+          },
+          "etapa": "cliche_solicitado",
+          "liberado": false,
+          "criadoEm": 1783343202385,
+          "atualizadoEm": 1783343252756
+        },
+        {
+          "id": "id_mr98g6ne_okmni",
+          "numero": 1,
+          "pa": "PA332",
+          "nome": "RT MORANGO PINGA MIX 900ML",
+          "material": "BOPP METALIZADO C210",
+          "dataEntrega": "2026-07-06",
+          "quantidade": "12,0000 / MI",
+          "metrosLineares": "711.199",
+          "observacoes": "",
+          "responsaveis": {
+            "layout_aprovado": "MATHEUS",
+            "cliche_solicitado": "MATHEUS",
+            "cliche_chegou": "",
+            "rebobinadeira": "",
+            "impressora_kromia": "",
+            "revisora": "",
+            "empacotando": ""
+          },
+          "etapa": "cliche_solicitado",
+          "liberado": false,
+          "criadoEm": 1783343120810,
+          "atualizadoEm": 1783343274706
+        }
+      ],
+      "fila": [
+        "id_mr98hxlc_r9vwr"
+      ]
+    },
+    "digital": {
+      "ordens": [],
+      "fila": []
+    }
+  },
+  "estoque": {
+    "entregas": [],
+    "envios": [],
+    "itens": [],
+    "movimentacoes": []
+  }
+}
