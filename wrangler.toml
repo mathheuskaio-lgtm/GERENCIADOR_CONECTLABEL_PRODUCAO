@@ -1,0 +1,6 @@
+name = "conectlabel-producao"
+main = "conectlabel-producao.html"
+compatibility_date = "2026-07-06"
+
+[assets]
+directory = "."
